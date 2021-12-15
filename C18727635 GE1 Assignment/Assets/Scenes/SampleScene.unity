@@ -294,6 +294,14 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!33 &1579315492
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1579315487}
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &820172780139173746
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -374,6 +382,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Landscape
       objectReference: {fileID: 0}
+    - target: {fileID: 4485074918055339917, guid: e6aa101191e80554cafb3deadba90441, type: 3}
+      propertyPath: cylinder
+      value: 
+      objectReference: {fileID: 1579315487}
     - target: {fileID: 4485074918055339918, guid: e6aa101191e80554cafb3deadba90441, type: 3}
       propertyPath: m_RootOrder
       value: 2
