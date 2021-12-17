@@ -5,6 +5,7 @@ using UnityEngine;
 class Tile
 {
     public GameObject theTile;
+
     public float creationTime;
 
     public Tile(GameObject t, float ct)
@@ -18,6 +19,10 @@ public class GenerateInfinite : MonoBehaviour
 {
     public GameObject plane;
     public GameObject cylinder;
+
+    public GameObject objectToSpawn;
+
+    private List<Vector3> tilePositions = new List<Vector3>();
 
     int planeSize = 10;
     int halfTilesX = 5;
@@ -48,9 +53,39 @@ public class GenerateInfinite : MonoBehaviour
                 t.name = tilename;
                 Tile tile = new Tile(t, updateTime);
                 tiles.Add(tilename, tile); 
+
+                tilePositions.Add(t.transform.position);
                 
             }
         }  
+        SpawnObject();
+       
+    }
+
+    private void SpawnObject(){
+
+        for(int c =0; c < 10; c++){
+            Debug.Log("Creating a cactus");
+            Debug.Log("visit" + ObjectSpawnLocation());
+            GameObject toPlaceObject = Instantiate(objectToSpawn, 
+            ObjectSpawnLocation(),
+            Quaternion.identity);
+        }
+    }
+
+    private Vector3 ObjectSpawnLocation () {
+
+        int rndIndex = Random.Range(0, tilePositions.Count);
+
+        Vector3 newPos = new Vector3 (
+            tilePositions[rndIndex].x,
+            tilePositions[rndIndex].y + 5f,
+            tilePositions[rndIndex].z
+        );
+
+        tilePositions.RemoveAt(rndIndex);
+        return newPos;
+
     }
 
     // Update is called once per frame
@@ -93,6 +128,7 @@ public class GenerateInfinite : MonoBehaviour
                         t.name = tilename;
                         Tile tile = new Tile(t, updateTime);
                         tiles.Add(tilename, tile);
+                         
                     }
                     else
                     {
