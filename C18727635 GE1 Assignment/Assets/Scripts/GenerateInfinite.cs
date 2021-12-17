@@ -79,7 +79,7 @@ public class GenerateInfinite : MonoBehaviour
 
         Vector3 newPos = new Vector3 (
             tilePositions[rndIndex].x,
-            tilePositions[rndIndex].y + 5f,
+            tilePositions[rndIndex].y + 4f,
             tilePositions[rndIndex].z
         );
 
