@@ -22,6 +22,8 @@ public class GenerateInfinite : MonoBehaviour
 
     public GameObject objectToSpawn;
 
+    [SerializeField] private Vector3 _Rotation;
+
     private List<Vector3> tilePositions = new List<Vector3>();
 
     int planeSize = 10;
@@ -67,9 +69,15 @@ public class GenerateInfinite : MonoBehaviour
         for(int c =0; c < 10; c++){
             Debug.Log("Creating a cactus");
             Debug.Log("visit" + ObjectSpawnLocation());
+
+            Quaternion myQuaternion = Quaternion.Euler(Vector3.up * -90);
+
             GameObject toPlaceObject = Instantiate(objectToSpawn, 
             ObjectSpawnLocation(),
-            Quaternion.identity);
+            // Quaternion.identity
+            myQuaternion);
+
+            Quaternion target = Quaternion.Euler(90, 0, 0);  
         }
     }
 
@@ -79,7 +87,7 @@ public class GenerateInfinite : MonoBehaviour
 
         Vector3 newPos = new Vector3 (
             tilePositions[rndIndex].x,
-            tilePositions[rndIndex].y + 4f,
+            tilePositions[rndIndex].y + 3f,
             tilePositions[rndIndex].z
         );
 

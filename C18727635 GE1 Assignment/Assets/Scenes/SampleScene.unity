@@ -551,7 +551,7 @@ PrefabInstance:
     - target: {fileID: 4485074918055339917, guid: e6aa101191e80554cafb3deadba90441, type: 3}
       propertyPath: objectToSpawn
       value: 
-      objectReference: {fileID: 5579258014060312954, guid: a79b64c5f1724a047930fc39ceff681e, type: 3}
+      objectReference: {fileID: 3781769824284380202, guid: a2de95d2d76b1ab4ca99b20fe8065ad9, type: 3}
     - target: {fileID: 4485074918055339918, guid: e6aa101191e80554cafb3deadba90441, type: 3}
       propertyPath: m_RootOrder
       value: 2
