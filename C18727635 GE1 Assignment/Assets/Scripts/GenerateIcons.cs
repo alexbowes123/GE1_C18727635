@@ -11,6 +11,7 @@ public class GenerateIcons : MonoBehaviour
     void Start()
     {
         int startRadius = 3;
+        float offset = 0;
 
         for(int j = 0; j < loops; j ++)
         {
@@ -27,8 +28,9 @@ public class GenerateIcons : MonoBehaviour
                 GameObject icon = GameObject.Instantiate<GameObject>(iconPrefab);
                 Debug.Log("icon created" + icon);
                 icon.transform.position = transform.TransformPoint
-                (new Vector3(x,y,0));
+                (new Vector3(x,y,offset));
                 icon.transform.parent = this.transform;
+                offset = offset + .2f;
             }
         }
         
