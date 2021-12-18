@@ -9,13 +9,17 @@ public class LerpColor : MonoBehaviour
     [SerializeField] Color[] myColors;
 
     int colorIndex = 0;
-    int len;
 
     float t = 0f;
+
+
+    int len;
+
+    
     // Start is called before the first frame update
     void Start()
     {
-        iconMeshRenderer = GetComponent <MeshRenderer>();
+        iconMeshRenderer = GetComponent <MeshRenderer> ();
         len = myColors.Length;
     }
 
