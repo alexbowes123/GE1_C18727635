@@ -21,8 +21,17 @@ public class GenerateInfinite : MonoBehaviour
     public GameObject cylinder;
 
     public GameObject objectToSpawn;
+    public int numCacti = 10;
+
+
+    public float theta = (2.0f * Mathf.PI) /10;
+   
+    // public float angle = 0;
 
     [SerializeField] private Vector3 _Rotation;
+
+    private float radius = 15f;
+
 
     private List<Vector3> tilePositions = new List<Vector3>();
 
@@ -64,35 +73,93 @@ public class GenerateInfinite : MonoBehaviour
        
     }
 
-    private void SpawnObject(){
+    // private void SpawnObject(){
 
-        for(int c =0; c < 10; c++){
-            Debug.Log("Creating a cactus");
-            Debug.Log("visit" + ObjectSpawnLocation());
+    //     for(int c =0; c < 10; c++){
+    //         Debug.Log("Creating a cactus");
+    //         Debug.Log("visit" + ObjectSpawnLocation());
 
-            Quaternion myQuaternion = Quaternion.Euler(Vector3.up * -90);
+    //         Quaternion myQuaternion = Quaternion.Euler(Vector3.up * -90);
+
+    //         GameObject toPlaceObject = Instantiate(objectToSpawn, 
+    //         ObjectSpawnLocation(),
+    //         // Quaternion.identity
+    //         myQuaternion);
+
+    //         // toPlaceObject.AddComponent<Rigidbody>();
+    //         // toPlaceObject.constraints = RigidbodyConstraints.FreezePosition;
+
+    //         Quaternion target = Quaternion.Euler(90, 0, 0);  
+    //     }
+    // }
+
+     private void SpawnObject(){
+
+  
+
+
+        for(int c =0; c < numCacti; c++){
+
+            float radians = 2 * Mathf.PI/numCacti * c;
 
             GameObject toPlaceObject = Instantiate(objectToSpawn, 
-            ObjectSpawnLocation(),
-            // Quaternion.identity
-            myQuaternion);
+            ObjectSpawnLocation(c, radians),
+            Quaternion.identity);
+            // myQuaternion);
+
+            //each object will point to the center of the spawn circle
+
+            Vector3 pointTo = new Vector3(0,3.6f,0);
+            toPlaceObject.transform.LookAt(pointTo);
+
+            // toPlaceObject.AddComponent<Rigidbody>();
+            // toPlaceObject.constraints = RigidbodyConstraints.FreezePosition;
 
             Quaternion target = Quaternion.Euler(90, 0, 0);  
         }
     }
 
-    private Vector3 ObjectSpawnLocation () {
+    // private Vector3 ObjectSpawnLocation () {                             //original random spawning code, may be necessary later
 
-        int rndIndex = Random.Range(0, tilePositions.Count);
+    //     int rndIndex = Random.Range(0, tilePositions.Count);
+
+    //     Vector3 newPos = new Vector3 (
+    //         tilePositions[rndIndex].x,
+    //         tilePositions[rndIndex].y + 3f,
+    //         tilePositions[rndIndex].z
+    //     );
+
+    //     tilePositions.RemoveAt(rndIndex);
+    //     return newPos;
+
+    // }
+
+
+    //for spawning objects (cacti) in a circle
+     private Vector3 ObjectSpawnLocation (int c, float radians) {                             //spawn objects in a circle
+
+        float angle = theta * c; //get angle between 2 objs
+
+        float circleX = Mathf.Sin(radians);
+        float circleZ = Mathf.Cos(radians);
+    
+    // int rndIndex = Random.Range(0, tilePositions.Count);
 
         Vector3 newPos = new Vector3 (
-            tilePositions[rndIndex].x,
-            tilePositions[rndIndex].y + 3f,
-            tilePositions[rndIndex].z
+            circleX,
+            0,
+            circleZ
         );
 
-        tilePositions.RemoveAt(rndIndex);
-        return newPos;
+        Debug.Log("Angle: "+angle);
+
+        Vector3 spawnCenter = new Vector3 (0, 3.6f, 0); //the center 
+
+        var spawnPos = spawnCenter + newPos * radius; 
+
+        this.transform.LookAt(spawnCenter);
+
+        return spawnPos;
 
     }
 
