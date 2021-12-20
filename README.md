@@ -201,7 +201,7 @@ If it does not exist, create the object, else update the creation time of the ex
 
 ```
 
-##First Person Player
+## First Person Player
 
 A player prefab called "First Person Player" was created which held the cyclinder (representing the player model) and the camera which would show the viewpoint of the player.
 In the prefab a script called "PlayerMovement" was written which holds an update() method that checks for
@@ -256,7 +256,7 @@ Main Camera object was written:
 ```
 
 
-##Procedural spiral of icospheres
+## Procedural spiral of icospheres
 
 A proceducral spiral of shapes called icospheres are generated. 
 The game object for an icosphere was created in Blender:
@@ -346,7 +346,7 @@ of the sphere's material over time
 
 
 
-##instantiated pyramids
+## instantiated pyramids
 An object called "pyrmaid" was created from a Blender model. An empty object was then created called
 "pyramidSpawner" which has a component script called "GeneratePyramids" which holds code for instantiating 
 pyramid objects every 4 seconds.
@@ -380,7 +380,7 @@ pyramid objects every 4 seconds.
 ```
 
 
-##instantiated flattened cubes
+## instantiated flattened cubes
 
 Similar to the icospheres, a cube object is created called "ColorCube" which holds a component scriptcalled "CubeColorLerp" which 
 holds the same functionality as the icosphere's "ColorLerp" script.
@@ -440,7 +440,7 @@ An empty object called "CubeSpawner" is created which holds a component script c
 
 
 
-##Audio listening 
+## Audio listening 
 
 The pyramid object has a component script called "AudioLoudnessTester" which
 moves instantiated pyramid objects through the sky across the x axis.
@@ -498,13 +498,50 @@ the loudness of the song is used to calculate the distance the pyramid moves:
 
 | Class/asset | Source |
 |-----------|-----------|
-| MyClass.cs | Self written |
+| GenerateTerrain.cs (Scripts folder) |  |
+| GenerateInfinite.cs (Scripts folder) | |
+| GenerateCubes.cs (Scripts folder) | |
+| GenerateIcons.cs (Scripts folder) | |
+| GeneratePyramids.cs (Scripts folder) | |
+| AudioLoudnessTest.cs (Scripts folder) | |
+| CubeAudioRotate.cs (Scripts folder) | |
+| CubeColorLerp.cs (Scripts folder) | |
+| IcoAudioSpin.cs (Scripts folder) | |
+| LerpColor.cs (Scripts folder) | |
+| MouseLook.cs (Scripts folder) | |
+| PlayBackground.cs (Scripts folder) | |
+| PlayerCollision.cs (Scripts folder) | |
+| PlayerMovement.cs (Scripts folder) | Modified from  |
+| rotateCactus.cs (Scripts folder) | Self written |
+
+
 | MyClass1.cs | Modified from [reference]() |
 | MyClass2.cs | From [reference]() |
 
 # References
 
+- Making an Infinite Terrain with Unity 5: https://www.youtube.com/watch?v=dycHQFEz8VI&t=7s
+- Procedural Placement : Beginners Guide EP 3 - Unity3D: https://www.youtube.com/watch?v=vfl2HyEar68
+- Spawning objects in a circle: https://answers.unity.com/questions/1661755/how-to-instantiate-objects-in-a-circle-formation-a.html
+- Color Lerp in Unity, Best practice: https://www.youtube.com/watch?v=C_f2ChrcSSM
+- How to make objects react to Music [Unity] | English: https://www.youtube.com/watch?v=LlkdQSjXd_A
+- Instantiating objects in a circle (GE1 2021/22 Week 2 Lecture): https://tudublin-my.sharepoint.com/personal/bryan_duggan_tudublin_ie/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fbryan%5Fduggan%5Ftudublin%5Fie%2FDocuments%2FRecordings%2FGame%20Engines%201%2D20211001%5F135742%2DMeeting%20Recording%2Emp4&parent=%2Fpersonal%2Fbryan%5Fduggan%5Ftudublin%5Fie%2FDocuments%2FRecordings
+
 # What I am most proud of in the assignment
+
+I am most proud of creating the infinite terrain for this project as well as the blender assets such as the Cactus model.
+I genuinely am happy with how the terrain turned out as I believe it does look like a desert when moving through it.
+
+I am also proud of the spiral of icospheres that I generated procedurally as well as the elements that respond to sound
+in an interesting way.
+
+There were some things that I wanted to implement but could not ultimately complete due to time constraints.
+- I initially wanted to have 3 different vehicle objects race in the desert and respond to the different terrain.
+- I wanted to implement ai pathfinding but struggled to find a way to implement it.
+
+Despite this, I am still quite happy with the outcome of this assignment as I learned much about Unity while working 
+on it such as object instantiation, using audio sources, transfoms of objects, hashtables, color lerping and many other 
+aspects of game development in Unity.
 
 # Proposal submitted earlier can go here:
 
@@ -542,26 +579,8 @@ public void render()
 }
 ```
 
-So is this without specifying the language:
 
-```
-public void render()
-{
-	ui.noFill();
-	ui.stroke(255);
-	ui.rect(x, y, width, height);
-	ui.textAlign(PApplet.CENTER, PApplet.CENTER);
-	ui.text(text, x + width * 0.5f, y + height * 0.5f);
-}
-```
 
-This is an image using a relative URL:
-
-![An image](images/p8.png)
-
-This is an image using an absolute URL:
-
-![A different image](https://bryanduggandotorg.files.wordpress.com/2019/02/infinite-forms-00045.png?w=595&h=&zoom=2)
 
 This is a youtube video:
 
