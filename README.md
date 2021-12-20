@@ -60,6 +60,50 @@ Moving the character:
 
 # How it works
 
+This project consists of key features:
+- A Procedural, infinite desert
+- Procedural, spiral of icospheres
+- Instantiated pyramids
+- Ring of Cacti
+- Color Lerping
+
+
+The procedural desert was the first feature I set out to create. 
+A single plane of land had to be created, this game object was called "Smart Plane" which was created
+from a "plane" game object which means it holds the mesh of a Plane.
+
+A smart plane had to be created with the perlin noise function, the reason for this is because 
+Perlin noise allows for pseudo-random gradient noise and gradual transitions between peaks and troughs when creating
+uneven terrain such as sand in a desert.  
+
+This is shown in the start() function of "GenerateTerrain" which is responsible for creating 
+an individual desert plane using perline noise:
+
+```    void Start()
+    {
+        //get the plane mesh filter
+        Mesh mesh = this.GetComponent<MeshFilter>().mesh;
+        Vector3[] vertices = mesh.vertices;
+
+        //for each vertex in the plane..
+        for(int v = 0; v < vertices.Length; v++)
+        {
+            //assign the height of the vertex to be a value random value that allows for smooth transition when joining 2 planes
+            vertices[v].y = Mathf.PerlinNoise((vertices[v].x + this.transform.position.x)/detailScale,
+                     (vertices[v].z + this.transform.position.z)/detailScale)*heightScale;
+        }
+
+        mesh.vertices = vertices;
+        mesh.RecalculateBounds();
+        //update the normals after modifying the vertices
+        mesh.RecalculateNormals();
+        //allow for collision on the plane
+        this.gameObject.AddComponent<MeshCollider>();
+        
+    }
+```
+
+
 # List of classes/assets in the project and whether made yourself or modified or if its from a source, please give the reference
 
 | Class/asset | Source |
