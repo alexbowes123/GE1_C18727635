@@ -32,6 +32,8 @@ Pyramids also respond to the audio and move through the spiral in response to th
 I intend to have this project give the user an impression that they are seeing something which resembles
 a science fiction movie with space ships and portals being discovered in a desert.
 
+![Image1 of project](pictures/MyProject1.PNG)
+
 
 
 
