@@ -496,30 +496,35 @@ the loudness of the song is used to calculate the distance the pyramid moves:
 
 # List of classes/assets in the project and whether made yourself or modified or if its from a source, please give the reference
 
-| Class/asset | Source |
+| Class| Source |
 |-----------|-----------|
-| GenerateTerrain.cs (Scripts folder) |  |
-| GenerateInfinite.cs (Scripts folder) | |
-| GenerateCubes.cs (Scripts folder) | |
-| GenerateIcons.cs (Scripts folder) | |
-| GeneratePyramids.cs (Scripts folder) | |
-| AudioLoudnessTest.cs (Scripts folder) | |
-| CubeAudioRotate.cs (Scripts folder) | |
-| CubeColorLerp.cs (Scripts folder) | |
-| IcoAudioSpin.cs (Scripts folder) | |
-| LerpColor.cs (Scripts folder) | |
-| MouseLook.cs (Scripts folder) | |
-| PlayBackground.cs (Scripts folder) | |
-| PlayerCollision.cs (Scripts folder) | |
-| PlayerMovement.cs (Scripts folder) | Modified from  |
+
+| GenerateTerrain.cs (Scripts folder) | Modified from "Making an Infinite Terrain with Unity 5"|
+| GenerateInfinite.cs (Scripts folder) | Modified from "Making an Infinite Terrain with Unity 5"|
+| GenerateCubes.cs (Scripts folder) | Modified from Week 2 Lab |
+| GenerateIcons.cs (Scripts folder) | Modified from Week 2 Lab |
+| GeneratePyramids.cs (Scripts folder) | Self written |
+| AudioLoudnessTest.cs (Scripts folder) | Modified from "How to make objects react to Music [Unity] | English" |
+| CubeAudioRotate.cs (Scripts folder) | Modified from "How to make objects react to Music [Unity] | English" |
+| CubeColorLerp.cs (Scripts folder) | Modified from "Color Lerp in Unity, Best practice" |
+| IcoAudioSpin.cs (Scripts folder) | Self written |
+| LerpColor.cs (Scripts folder) | Modified from "Color Lerp in Unity, Best practice"|
+| MouseLook.cs (Scripts folder) | Modified from "FIRST PERSON MOVEMENT in Unity - FPS Controller" |
+| PlayBackground.cs (Scripts folder) | Self written |
+| PlayerCollision.cs (Scripts folder) | Self written |
+| PlayerMovement.cs (Scripts folder) | Modified from "FIRST PERSON MOVEMENT in Unity - FPS Controller" |
 | rotateCactus.cs (Scripts folder) | Self written |
+|-----------|-----------|
+| Asset | Source |
+|-----------|-----------|
+| Cactus (model) | Self made |
+| Pyramid (model) | Self made |
+| Icosphere (model) | Self made |
+| Western Demo Audio Assets (folder) | Downloaded from "https://assetstore.unity.com/packages/audio/sound-fx/western-audio-music-67788" |
 
-
-| MyClass1.cs | Modified from [reference]() |
-| MyClass2.cs | From [reference]() |
 
 # References
-
+- FIRST PERSON MOVEMENT in Unity - FPS Controller: https://www.youtube.com/watch?v=_QajrabyTJc
 - Making an Infinite Terrain with Unity 5: https://www.youtube.com/watch?v=dycHQFEz8VI&t=7s
 - Procedural Placement : Beginners Guide EP 3 - Unity3D: https://www.youtube.com/watch?v=vfl2HyEar68
 - Spawning objects in a circle: https://answers.unity.com/questions/1661755/how-to-instantiate-objects-in-a-circle-formation-a.html
@@ -543,55 +548,16 @@ Despite this, I am still quite happy with the outcome of this assignment as I le
 on it such as object instantiation, using audio sources, transfoms of objects, hashtables, color lerping and many other 
 aspects of game development in Unity.
 
-# Proposal submitted earlier can go here:
 
-## This is how to markdown text:
 
-This is *emphasis*
+#Video Demo
 
-This is a bulleted list
-
-- Item
-- Item
-
-This is a numbered list
-
-1. Item
-1. Item
-
-This is a [hyperlink](http://bryanduggan.org)
-
-# Headings
-## Headings
-#### Headings
-##### Headings
-
-This is code:
-
-```Java
-public void render()
-{
-	ui.noFill();
-	ui.stroke(255);
-	ui.rect(x, y, width, height);
-	ui.textAlign(PApplet.CENTER, PApplet.CENTER);
-	ui.text(text, x + width * 0.5f, y + height * 0.5f);
-}
-```
+[!Short demo of assignment] (https://youtu.be/H9UAGp1bVEE)
 
 
 
 
-This is a youtube video:
 
-[![YouTube](http://img.youtube.com/vi/J2kHSSFA4NU/0.jpg)](https://www.youtube.com/watch?v=J2kHSSFA4NU)
 
-This is a table:
 
-| Heading 1 | Heading 2 |
-|-----------|-----------|
-|Some stuff | Some more stuff in this column |
-|Some stuff | Some more stuff in this column |
-|Some stuff | Some more stuff in this column |
-|Some stuff | Some more stuff in this column |
 
