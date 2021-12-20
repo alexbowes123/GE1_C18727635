@@ -103,6 +103,108 @@ an individual desert plane using perline noise:
     }
 ```
 
+After creating an individual desert plane, an empty object called "Landscape" was created. 
+This object is responsible for instantiating new tiles for the player to walk along.
+
+"Landscape" was given a new script component called "GenerateInfinite" which contains the code for 
+generating new tiles.
+
+In this script a Tile class is created which holds the GameObject of a tile (Smart Plane), the tile's creation time and a constructor for the tile.
+
+In the GenerateInfinite class a hashtable is used to store key+values of tiles that are created. 
+In the start() method, the initial tiles are created by instantiating tile objects
+relative to the starting position in the world when the system begins:
+
+```
+ void Start()
+    {
+        this.gameObject.transform.position = Vector3.zero; //set position of tile to  0,0,0 of world
+
+        startPos = Vector3.zero; // start position is also 0,0,0
+
+        float updateTime = Time.realtimeSinceStartup; //time since game started
+
+    
+        //Generate initial tiles around the starting tile 
+        for(int x = - halfTilesX; x < halfTilesX; x++)
+        {
+            for(int z = -halfTilesZ; z < halfTilesZ; z++)
+            {
+                //position vector that is relative to the starting position 
+                Vector3 pos = new Vector3((x * planeSize+startPos.x),
+                        0,(z * planeSize+startPos.z));
+
+                //instantiate a plane at the position
+                GameObject t = (GameObject) Instantiate(plane, pos, Quaternion.identity);
+
+                string tilename = "Tile_" + ((int)(pos.x)).ToString() + "_" + ((int)(pos.z)).ToString();
+                t.name = tilename;
+
+                //new tile object is created and added to the hashtable with its name for keeping track of existing tiles
+                Tile tile = new Tile(t, updateTime);
+                tiles.Add(tilename, tile); 
+
+                tilePositions.Add(t.transform.position);
+                
+            }
+        }  
+        SpawnObject(); //spawn cacti when the game starts
+       
+    }
+
+ ```
+
+The update() method of GenerateInfinite handles creating new tiles as the player moves through the 
+world.
+This gets the distance the player has moved from the starting position, checks has it exceeded the x or z size of a plane,
+then generates a new tile if this is true:
+
+```
+	int xMove = (int)(cylinder.transform.position.x - startPos.x);
+        int zMove = (int)(cylinder.transform.position.z - startPos.z);
+
+
+        //if move further than the planeSize
+        if(Mathf.Abs(xMove) >= planeSize || Mathf.Abs(zMove) >= planeSize)
+        {
+            //timestamp for new tiles created
+            float updateTime = Time.realtimeSinceStartup;
+
+            //retrieve integer value for x and z position and round off to nearest 10 (tilesize)
+            int playerX = (int)(Mathf.Floor(cylinder.transform.position.x/planeSize)*planeSize);
+            int playerZ = (int)(Mathf.Floor(cylinder.transform.position.z/planeSize)*planeSize);
+
+
+ ```
+The position vector of the new tile is created and then a check is done to see if the tile already exists in the hashtable.
+If it does not exist, create the object, else update the creation time of the existing tiles:
+
+``` 
+ if(!tiles.ContainsKey(tilename))//if a tile has not already been created that has the same name.. (check if there is not already a tile on this spot)
+                    {
+                        GameObject t = (GameObject) Instantiate(plane, pos,
+                                Quaternion.identity);
+                                                                                    //create and add the new tile to hashtable
+                        t.name = tilename;
+                        Tile tile = new Tile(t, updateTime);
+                        tiles.Add(tilename, tile);
+                         
+                    }
+                    else
+                    {
+                        (tiles[tilename] as Tile).creationTime = updateTime;
+                    }
+
+```
+
+
+
+
+
+
+
+
+
 
 # List of classes/assets in the project and whether made yourself or modified or if its from a source, please give the reference
 
