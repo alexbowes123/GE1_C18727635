@@ -12,22 +12,22 @@ public class LerpColor : MonoBehaviour
 
     float t = 0f;
 
-
     int len;
 
-    
     // Start is called before the first frame update
     void Start()
     {
-        iconMeshRenderer = GetComponent <MeshRenderer> ();
+        iconMeshRenderer = GetComponent <MeshRenderer> (); //get the mesh renderer of the icosphere
         len = myColors.Length;
     }
 
     // Update is called once per frame
     void Update()
     {
+        //lerping from the current colour of the material to the colour at myColour[colourIndex] over time
         iconMeshRenderer.material.color = Color.Lerp(iconMeshRenderer.material.color, myColors[colorIndex], lerpTime*Time.deltaTime);
 
+        //assign value of t to be a value between t and 1f that changes over time
         t = Mathf.Lerp(t, 1f, lerpTime*Time.deltaTime);
         if (t > .9f){
             t = 0f;

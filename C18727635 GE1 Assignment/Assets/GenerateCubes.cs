@@ -10,39 +10,30 @@ public class GenerateCubes : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        int startRadius = 3;
+        int radius = 5;
         float offset = 0;
 
-        // for(int j = 0; j < loops; j ++)
-        // {
-            // int radius = startRadius;
-            // int num = (int)(Mathf.PI * 2.0f * j * startRadius);
-            // float theta = (2.0f * Mathf.PI) / (float) num;
+        //generating 10 cubes
+        for(int i = 0; i < 10; i++)
+        {
 
-            for(int i = 0; i < 10; i++)
-            {
-                int radius = startRadius;
-                int num = (int)(Mathf.PI * 2.0f * i * startRadius);
-                float theta = (2.0f * Mathf.PI) / 10;
+            //get angle between the 10 cubes
+            float theta = (2.0f * Mathf.PI) / 10;
+            float angle = theta * i;
 
-                float angle = theta * i;
-                float x = Mathf.Sin(angle) * radius * 2.1f;
-                float y = Mathf.Cos(angle) * radius * 2.1f;
+            //get x and y positions of cube
+            float x = Mathf.Sin(angle) * radius * 2.1f;
+            float y = Mathf.Cos(angle) * radius * 2.1f;
 
-                GameObject cube = GameObject.Instantiate<GameObject>(CubePrefab);
+            GameObject cube = GameObject.Instantiate<GameObject>(CubePrefab);
 
-                cube.transform.position = transform.TransformPoint
-                (new Vector3(x,y,offset +10f));
-                cube.transform.parent = this.transform;
-                offset = offset + .2f;
-            }
-        // }
+            //set position of the cube
+            cube.transform.position = transform.TransformPoint(new Vector3(x,y,offset +10f));
+           
+            cube.transform.parent = this.transform;
+            offset = offset + .2f;
+        }
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

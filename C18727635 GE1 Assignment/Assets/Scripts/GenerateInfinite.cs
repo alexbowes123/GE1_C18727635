@@ -158,6 +158,7 @@ public class GenerateInfinite : MonoBehaviour
             {
                 for(int z = -halfTilesZ; z < halfTilesZ; z++)
                 {
+                    
                     Vector3 pos = new Vector3((x * planeSize + playerX),
                                     0,
                                         (z * planeSize + playerZ)); //offset based on players position

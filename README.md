@@ -62,7 +62,7 @@ Moving the character:
 
 This project consists of key features:
 - A Procedural, infinite desert
-- Procedural, spiral of icospheres
+- Procedural spiral of icospheres
 - Instantiated pyramids
 - Ring of Cacti
 - Color Lerping
@@ -194,6 +194,294 @@ If it does not exist, create the object, else update the creation time of the ex
                     {
                         (tiles[tilename] as Tile).creationTime = updateTime;
                     }
+   		//copy new hashtable contents to the working hashtable
+            	tiles = newTerrain;
+	//update start position
+            startPos = cylinder.transform.position;
+
+```
+
+##First Person Player
+
+A player prefab called "First Person Player" was created which held the cyclinder (representing the player model) and the camera which would show the viewpoint of the player.
+In the prefab a script called "PlayerMovement" was written which holds an update() method that checks for
+input such as the keys 'A' and 'D' being pressed for horizontal movement ranging from -1 to 1 and 'W' and 'S' for vertical movement ranging from -1 to 1.
+
+After input is receieved, a vector3 called "move" holds the transform for the player object to move:
+
+```
+  public CharacterController controller;
+
+    public float speed = 12f;
+
+    // Update is called once per frame
+    void Update()
+    {
+        float x = Input.GetAxis("Horizontal");
+        float z = Input.GetAxis("Vertical");
+
+        // Debug.Log("Getting horizontal input" + x);
+        // Debug.Log("Getting Vert input" + z);
+
+        Vector3 move = transform.right * x + transform.forward * z;
+        
+        controller.Move(move * speed * Time.deltaTime);
+    }
+
+```
+
+
+For handling the player camera movement a script called "MouseLook" which is a component of the 
+Main Camera object was written:
+
+```
+ void Update()
+    {
+
+        //get the value for movement ranging between -1 and 1 when moving along x and y with mouse
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+
+    	xRotation -= mouseY;
+
+        //limit the degrees which the camera can rotate along the x axis to prevent unpleasant camera angles
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+
+        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+
+        playerBody.Rotate(Vector3.up * mouseX);//move the player body in accordance to the camera change
+    }
+
+
+```
+
+
+##Procedural spiral of icospheres
+
+A proceducral spiral of shapes called icospheres are generated. 
+The game object for an icosphere was created in Blender:
+
+![Image of Icosphere](pictures/Ico.PNG)
+
+This was imported into unity as a game object called "icosphere" and it was assigned
+a script component called "LerpColor" which would Gradually change the colour of the game object over time:
+
+```
+  // Start is called before the first frame update
+    void Start()
+    {
+        iconMeshRenderer = GetComponent <MeshRenderer> (); //get the mesh renderer of the icosphere
+        len = myColors.Length;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        //set the colour of the icosphere's material to 
+        iconMeshRenderer.material.color = Color.Lerp(iconMeshRenderer.material.color, myColors[colorIndex], lerpTime*Time.deltaTime);
+
+        t = Mathf.Lerp(t, 1f, lerpTime*Time.deltaTime);
+        if (t > .9f){
+            t = 0f;
+            colorIndex++;
+            colorIndex = (colorIndex >= len) ? 0 : colorIndex;
+        }
+    }
+
+```
+
+
+An empty game object called "icoSpawner" was created which is used to generate the objects 
+in a pattern.
+
+The object has a component script called "GenerateIcons" which handles this functionality.
+
+```
+
+    for(int j = 0; j < loops; j ++)
+        {
+            //radius will be recalculated each loop as the spiral expands outwards
+            int radius = startRadius + j;
+            
+            int num = (int)(Mathf.PI * 2.0f * j * startRadius);
+            float theta = (2.0f * Mathf.PI) / (float) num;
+
+            for(int i = 0; i < num; i++)
+            {
+                float angle = theta * i; //angle between the the previous and current sphere
+                float x = Mathf.Sin(angle) * radius * 2.1f;
+                float y = Mathf.Cos(angle) * radius * 2.1f;
+
+                GameObject icon = GameObject.Instantiate<GameObject>(iconPrefab);
+                Debug.Log("icon created" + icon);
+                icon.transform.position = transform.TransformPoint(new Vector3(x,y,offset));
+                icon.transform.parent = this.transform;
+                offset = offset + .2f;
+            }
+        }
+
+```
+
+The icosphere object has a script component called LerpColor which gradually changes the colour
+of the sphere's material over time
+
+```
+
+  void Update()
+    {
+        //lerping from the current colour of the material to the colour at myColour[colourIndex] over time
+        iconMeshRenderer.material.color = Color.Lerp(iconMeshRenderer.material.color, myColors[colorIndex], lerpTime*Time.deltaTime);
+
+        //assign value of t to be a value between t and 1f that changes over time
+        t = Mathf.Lerp(t, 1f, lerpTime*Time.deltaTime);
+        if (t > .9f){
+            t = 0f;
+            colorIndex++;
+            colorIndex = (colorIndex >= len) ? 0 : colorIndex;
+        }
+    }
+
+
+```
+
+
+
+##instantiated pyramids
+An object called "pyrmaid" was created from a Blender model. An empty object was then created called
+"pyramidSpawner" which has a component script called "GeneratePyramids" which holds code for instantiating 
+pyramid objects every 4 seconds.
+
+```
+ void Start()
+    {
+        //create a pyramid immediately
+         GameObject pyramid = GameObject.Instantiate<GameObject>(pyramidPrefab);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        //reduce the value of timer by 1 second every second
+        timer -= 1 * Time.deltaTime;
+        if(timer <= 0f) //if the timer hits 0 seconds, instantiate a pyramid
+        {
+
+            GameObject pyramid = GameObject.Instantiate<GameObject>(pyramidPrefab);
+            //instantiate at the following position
+            pyramid.transform.position = transform.TransformPoint(new Vector3((float)12,(float)15,(float)0));
+
+            Debug.Log("Pyramid created at "+pyramid.transform.position.x+","+pyramid.transform.position.y+","+pyramid.transform.position.z);
+            //reset timer
+            timer = 4f;
+        }
+        
+    }
+
+```
+
+
+##instantiated flattened cubes
+
+Similar to the icospheres, a cube object is created called "ColorCube" which holds a component scriptcalled "CubeColorLerp" which 
+holds the same functionality as the icosphere's "ColorLerp" script.
+The ColorCube objects lerp through an array of colors over time:
+
+``` 
+  void Update()
+    {
+         //lerping from the current colour of the material to the colour at myColour[colourIndex] over time
+        CubeMeshRenderer.material.color = Color.Lerp(CubeMeshRenderer.material.color, myColors[colorIndex], lerpTime*Time.deltaTime);
+
+        
+        //assign value of t to be a value between t and 1f that changes over time
+        t = Mathf.Lerp(t, 1f, lerpTime*Time.deltaTime);
+        if (t > .9f){
+            t = 0f;
+            colorIndex++;
+            colorIndex = (colorIndex >= len) ? 0 : colorIndex;
+        }
+    }
+
+```
+
+An empty object called "CubeSpawner" is created which holds a component script called 
+"GenerateCubes" instantates a ring of flattened cubes, similar to the ring of cacti:
+
+```
+ void Start()
+    {
+        int radius = 5;
+        float offset = 0;
+
+        //generating 10 cubes
+        for(int i = 0; i < 10; i++)
+        {
+
+            //get angle between the 10 cubes
+            float theta = (2.0f * Mathf.PI) / 10;
+            float angle = theta * i;
+
+            //get x and y positions of cube
+            float x = Mathf.Sin(angle) * radius * 2.1f;
+            float y = Mathf.Cos(angle) * radius * 2.1f;
+
+            GameObject cube = GameObject.Instantiate<GameObject>(CubePrefab);
+
+            //set position of the cube
+            cube.transform.position = transform.TransformPoint(new Vector3(x,y,offset +10f));
+           
+            cube.transform.parent = this.transform;
+            offset = offset + .2f;
+        }
+        
+    }
+
+```
+
+
+
+##Audio listening 
+
+The pyramid object has a component script called "AudioLoudnessTester" which
+moves instantiated pyramid objects through the sky across the x axis.
+The song "Western inside loop" is passed in as the audio source and
+the loudness of the song is used to calculate the distance the pyramid moves:
+
+```
+
+ private void Awake()
+    {
+        clipSampleData = new float[sampleDataLength];
+    }
+
+    private void Update()
+    {
+        //handles the smoothness of the animation
+        currentUpdateTime += Time.deltaTime; 
+        if(currentUpdateTime >= updateStep)
+        {
+            currentUpdateTime = 0f;
+            audioSource.clip.GetData(clipSampleData, audioSource.timeSamples); 
+            
+            clipLoudness = 0f;
+            foreach (var sample in clipSampleData)
+            {
+                clipLoudness+= Mathf.Abs(sample);
+            }
+
+            clipLoudness/=sampleDataLength;
+
+            clipLoudness *= sizeFactor; 
+          
+            //restrict the value of clipLoudness between the declared min and max sizes
+            clipLoudness = Mathf.Clamp(clipLoudness, minSize, maxSize);
+
+            Vector3 bounce = new Vector3(0, clipLoudness * 250,0); 
+
+            pyramid.transform.Translate(bounce * Time.deltaTime); //Move the pyramids through the sky in accordance with the loudness of the song
+            
+        }
+    }
 
 ```
 
