@@ -550,9 +550,9 @@ aspects of game development in Unity.
 
 
 
-#Video Demo
+# Video Demo
 
-[!Short demo of assignment] (https://youtu.be/H9UAGp1bVEE)
+[[!Short demo of assignment](https://youtu.be/H9UAGp1bVEE)]
 
 
 
