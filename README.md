@@ -35,10 +35,28 @@ a science fiction movie with space ships and portals being discovered in a deser
 ![Image1 of project](pictures/MyProject1.PNG)
 
 
+![Image2 of project](pictures/MyProject2.PNG)
+
+
+![Image3 of project](pictures/MyProject3.PNG)
+
+
+I think this project resembles something from the show Stargate:
+
+![stargate inspiration](pictures/Stargate.PNG)
 
 
 
 # Instructions for use
+
+The version of Unity which this project was created with was: 2020.3.19f1
+
+The user can control the camera by moving the mouse in the dircention which they want to look at.
+Moving the character:
+- Press W key = Move forward
+- Press S key = Move backward
+- Press A key = strafe left
+- Press D key = strafe right
 
 # How it works
 
