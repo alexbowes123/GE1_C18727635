@@ -1,11 +1,15 @@
 # Project Title
 
 Name: Alexander Bowes
+
 Student Number: C18727635
+
 Course: Computer Science TU856
+
 Module: Games Engines 1 2021/22
 
 # Description of the project
+
 This project is a system which demonstrates a number of procedurally generated elements. 
 The project consists of a procedurally generated desert using perlin noise which can be navigated 
 through using a first person camera.
@@ -552,7 +556,9 @@ aspects of game development in Unity.
 
 # Video Demo
 
-[[!Short demo of assignment](https://youtu.be/H9UAGp1bVEE)]
+[[Short demo of assignment](https://youtu.be/H9UAGp1bVEE)]
+
+[[Full demo of assignment](https://youtu.be/ORIwC-n3FrM)]
 
 
 
